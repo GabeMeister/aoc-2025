@@ -1,0 +1,12 @@
+module Main where
+
+import Day1 (part1, part2)
+
+main :: IO ()
+main = do
+  -- contents <- readFile "./app/Day1/input_short.txt"
+  contents <- readFile "./app/Day1/input_long.txt"
+  let lineInputs = lines contents
+
+  putStrLn ("Part 1: " ++ (show (part1 lineInputs)))
+  print (part2 lineInputs)
