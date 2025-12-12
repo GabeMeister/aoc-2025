@@ -4,6 +4,7 @@ import Day1 (part1, part2)
 
 main :: IO ()
 main = do
+  -- contents <- readFile "./app/Day1/input_shortest.txt"
   -- contents <- readFile "./app/Day1/input_short.txt"
   contents <- readFile "./app/Day1/input_long.txt"
   let lineInputs = lines contents
