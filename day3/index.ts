@@ -1,6 +1,6 @@
 // const input = await Bun.file("input_shortest.txt").text();
-const input = await Bun.file("input_short.txt").text();
-// const input = await Bun.file("input_long.txt").text();
+// const input = await Bun.file("input_short.txt").text();
+const input = await Bun.file("input_long.txt").text();
 const banks = input.trim().split("\n");
 if (!banks) {
   process.exit(0);
@@ -51,17 +51,18 @@ const part1 = () => {
 const getHighestJoltagePt2 = (bank: string) => {
   // There's up to 3 "free spaces" that you can play around with when trying to
   // find the maximum 12 digit number
-  let freeSpaces = 3;
+  let freeSpacesLeft = 3;
   let startingIdx = 0;
   let result = "";
+  let length = 0;
 
-  while (freeSpaces > 0) {
+  while (length < 12) {
     let tmpHighestIdx = 0;
     let tmpHighest = 0;
 
     // Find the potential highest digit with the amount of free spaces we have
     // left
-    for (let i = startingIdx; i <= startingIdx + freeSpaces; i++) {
+    for (let i = startingIdx; i <= startingIdx + freeSpacesLeft; i++) {
       const digit = parseInt(bank[i] ?? "0");
       if (digit > tmpHighest) {
         tmpHighest = digit;
@@ -69,15 +70,12 @@ const getHighestJoltagePt2 = (bank: string) => {
       }
     }
 
-    freeSpaces -= tmpHighestIdx;
+    freeSpacesLeft -= tmpHighestIdx - startingIdx;
     startingIdx = tmpHighestIdx + 1;
 
     result += bank[tmpHighestIdx] ?? "";
+    length++;
   }
-
-  // Always need to add back 9 spaces
-  const extras = bank.slice(startingIdx, startingIdx + 9);
-  result += extras;
 
   return parseInt(result);
 };
